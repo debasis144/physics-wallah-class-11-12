@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class 12 Physics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #22303c;
+        --secondary-color: #a5bacc;
+        --accent-color: #f72585;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        color: var(--dark-color);
+        background-color: var(--light-color);
+        overflow-x: hidden;
+      }
+
+      /* Animated Math Background */
+      .math-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.1;
+        overflow: hidden;
+      }
+
+      .math-symbol {
+        position: absolute;
+        color: rgba(67, 97, 238, 0.3);
+        font-size: 24px;
+        animation: float 15s infinite linear;
+        user-select: none;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+        }
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+        padding: 2.5rem 0;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 2.8rem;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        font-weight: 300;
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .search-container {
+        margin: 2rem auto;
+        max-width: 70%;
+      }
+
+      #chapter-search {
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 50px;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        font-size: 1rem;
+        outline: none;
+      }
+
+      .chapters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        padding: 2rem 0;
+      }
+
+      .chapter-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .chapter-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .chapter-card:hover .chapter-icon {
+        transform: scale(1.1);
+        color: var(--accent-color);
+      }
+
+      .chapter-content {
+        padding: 1.8rem;
+      }
+
+      .chapter-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+        transition: all 0.3s ease;
+      }
+
+      .chapter-number {
+        font-size: 0.9rem;
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+        background: rgba(67, 97, 238, 0.1);
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+
+      .chapter-title {
+        font-size: 1.4rem;
+        margin: 0.5rem 0;
+        color: var(--dark-color);
+        font-weight: 600;
+      }
+
+      .resource-links {
+        display: flex;
+        gap: 10px;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .resource-link {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .video-link {
+        background-color: #ff0000;
+        color: white;
+      }
+
+      .notes-link {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .resource-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .video-link:hover {
+        background-color: #cc0000;
+      }
+
+      .notes-link:hover {
+        background-color: var(--secondary-color);
+      }
+
+      .resource-link i {
+        margin-right: 5px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 3rem 0;
+        background: linear-gradient(135deg, var(--dark-color), #343a40);
+        color: white;
+        margin-top: 3rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 1.5rem;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent-color);
+      }
+
+      @media (max-width: 768px) {
+        .chapters-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        .chapter-content {
+          padding: 1.5rem;
+        }
+      }
+
+      .chapter-icon {
+        --icon-size: clamp(5rem, 10% + 1rem, 5rem);
+        width: var(--icon-size);
+        height: var(--icon-size);
+        margin: 0 auto 1rem; /* Centered with space below */
+      }
+
+      .chapter-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Animated Math Background -->
+    <div class="math-background" id="mathBackground"></div>
+
+    <header>
+      <div class="container">
+        <h1>Physics 12th Rajwant Sir</h1>
+        <p class="subtitle">Class 11 & 12 Comprehensive Learning Portal</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="search-container">
+        <input
+          type="text"
+          id="chapter-search"
+          placeholder="Search chapters..."
+        />
+      </div>
+
+      <div class="chapters-grid">
+        <!-- Chapter 1 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/20.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 01</div>
+            <h3 class="chapter-title">Electric Charges and Field</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLmqG3O2cPPH3Y2Ce_uDm-erPuV72MWDy4"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/10zEJ1DU-HrGNFGqXw68RiCzomiFxPYv0?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/35.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 02</div>
+            <h3 class="chapter-title">
+              Electrostatic Potential and Capacitance
+            </h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLmqG3O2cPPH0rrUByDfrSBeEIOs380hgy"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1YVKGovGD1M41faOboVlERwD0qiz8M-t_?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/22.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 03</div>
+            <h3 class="chapter-title">Current Electricity</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLmqG3O2cPPH2hq8xu4dKjuSlm8LODi2nd"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1RPte4-WTvLvYVO2tOKAQGvkrBCKSsdBb?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/25.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 04</div>
+            <h3 class="chapter-title">Moving Charge and Magnetism</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPKb1dqdeiQCubgchQikmHqe"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1PbTCS9xAc8Urjnae2qhCeCEboJ3bUgsU?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 5 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/26.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 05</div>
+            <h3 class="chapter-title">Magnetism And Matter</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPLHz2NAum1kaibHOGSjnfuL"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1NshSxV_neADEf57nRwumviZzFnq30MOD?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 6 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/34.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 06</div>
+            <h3 class="chapter-title">Electromagnetic Induction</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPLtwqOXDa263euGmAYZyh5y"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1BU0n2ZBLpkk5lrmhaMM15sQ32YS0Sxej?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 7 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/30.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 07</div>
+            <h3 class="chapter-title">Alternating Current</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPKmN6WCC5upHcCWiNJAnOfh"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/14VAqPyPdwghWGHfudAYJhJyp9lp9qqw5?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 8 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/27.webp"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 08</div>
+            <h3 class="chapter-title">EM Waves</h3>
+            <div class="resource-links">
+              <a
+                href="https://t.me/+0qjtgB_YNf5hMGE9"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1-2bZ0zg3fk2rTDomNtVVV715U499e3J7?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 9 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/33.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 09</div>
+            <h3 class="chapter-title">Ray Optics</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPL03MshW4xR6JDkD0F5tY2B"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/19ao8b-5paJK47iLjyoJOEiqfTh4k0kCx?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 10 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/17.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 10</div>
+            <h3 class="chapter-title">Communication</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPLVU_Jili1vpwZwhl3dtZK-"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1AAqDl-R8b_Q3A9BEItLrBE-GEfOtXIjV?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 11 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/31.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 11</div>
+            <h3 class="chapter-title">Wave Optics</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPJt5Nt7edwTFtIgooXx_kvZ"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1Zfk5XBHsx3yLfXrDsbZSwlWQeuwEwzCs?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 12 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/38.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 12</div>
+            <h3 class="chapter-title">Dual Nature of Matter & Radiation</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPI1P8Nf49dyhJBnPHGHAN-J"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1ncepNCBPzGJ7xF_UrVCt7BuNasa6rKbS?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 13 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/23.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 13</div>
+            <h3 class="chapter-title">Atoms</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPKHpJfrWk6Gis0yk38nr4SO"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1wPUsJvRyGRkFtpteJ7PCVPdmJqUBmtMz?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 14 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/39.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 14</div>
+            <h3 class="chapter-title">Nuclei</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPIeU4dPRlfEYTGH1vfKeBBy"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1H2CAWZHze_GInB-IWOUkviDenYRloZP6?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 15 -->
+        <div class="chapter-card">
+          <div class="chapter-content">
+            <div class="chapter-icon">
+              <!-- For PNG -->
+              <img
+                src="images_p/32.png"
+                alt="Algebra"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+            </div>
+            <div class="chapter-number">Chapter 15</div>
+            <h3 class="chapter-title">Semiconductors</h3>
+            <div class="resource-links">
+              <a
+                href="https://www.youtube.com/playlist?list=PLOa7lKy8mTPLup60WBCnlzlI2gDMY3JP6"
+                class="resource-link video-link"
+                target="_blank"
+              >
+                <i class="fas fa-play"></i> Videos
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1B-K3sgcSF9jjurtbyvkspTWns3xA9vi1?usp=drive_link"
+                class="resource-link notes-link"
+                target="_blank"
+              >
+                <i class="fas fa-file-alt"></i> Notes
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <h3>Physics</h3>
+        <p>Comprehensive learning resource for Class 11 & 12 students</p>
+        <div class="footer-links">
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8">
+          © 2025 Physics. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Create animated math symbols in background
+      document.addEventListener("DOMContentLoaded", function () {
+        const mathBackground = document.getElementById("mathBackground");
+        const mathSymbols = [
+          "π",
+          "θ",
+          "∑",
+          "∫",
+          "√",
+          "∞",
+          "Δ",
+          "σ",
+          "μ",
+          "α",
+          "β",
+          "γ",
+          "≈",
+          "≠",
+          "≤",
+          "≥",
+          "±",
+          "∴",
+          "∵",
+          "∩",
+          "∪",
+          "∈",
+          "∉",
+          "∅",
+          "∠",
+          "⊥",
+          "∥",
+          "≅",
+          "∼",
+          "≡",
+          "⊕",
+          "⊗",
+          "⊙",
+          "⋮",
+          "⋯",
+          "⋰",
+          "⋱",
+          "∀",
+          "∃",
+          "∄",
+          "∏",
+          "∐",
+          "∮",
+          "∴",
+          "∵",
+          "∶",
+          "∷",
+          "≔",
+          "≕",
+          "≜",
+          "≝",
+          "≟",
+          "⊂",
+          "⊃",
+          "⊆",
+          "⊇",
+          "⊄",
+          "⊅",
+          "⊈",
+          "⊉",
+          "⊊",
+          "⊋",
+          "⊍",
+          "⊎",
+          "⊏",
+          "⊐",
+          "⊑",
+          "⊒",
+          "⊓",
+          "⊔",
+          "⊕",
+          "⊖",
+          "⊗",
+          "⊘",
+          "⊙",
+          "⊚",
+          "⊛",
+          "⊜",
+          "⊝",
+          "⊞",
+          "⊟",
+          "⊠",
+          "⊡",
+          "⊢",
+          "⊣",
+          "⊤",
+          "⊥",
+          "⊦",
+          "⊧",
+          "⊨",
+          "⊩",
+          "⊪",
+          "⊫",
+          "⊬",
+          "⊭",
+          "⊮",
+          "⊯",
+          "⊰",
+          "⊱",
+          "⊲",
+          "⊳",
+          "⊴",
+          "⊵",
+          "⊶",
+          "⊷",
+          "⊸",
+          "⊹",
+          "⊺",
+          "⊻",
+          "⊼",
+          "⊽",
+          "⊾",
+          "⊿",
+          "⋀",
+          "⋁",
+          "⋂",
+          "⋃",
+          "⋄",
+          "⋅",
+          "⋆",
+          "⋇",
+          "⋈",
+          "⋉",
+          "⋊",
+          "⋋",
+          "⋌",
+          "⋍",
+          "⋎",
+          "⋏",
+          "⋐",
+          "⋑",
+          "⋒",
+          "⋓",
+          "⋔",
+          "⋕",
+          "⋖",
+          "⋗",
+          "⋘",
+          "⋙",
+          "⋚",
+          "⋛",
+          "⋜",
+          "⋝",
+          "⋞",
+          "⋟",
+          "⋠",
+          "⋡",
+          "⋢",
+          "⋣",
+          "⋤",
+          "⋥",
+          "⋦",
+          "⋧",
+          "⋨",
+          "⋩",
+          "⋪",
+          "⋫",
+          "⋬",
+          "⋭",
+          "⋮",
+          "⋯",
+          "⋰",
+          "⋱",
+          "⋲",
+          "⋳",
+          "⋴",
+          "⋵",
+          "⋶",
+          "⋷",
+          "⋸",
+          "⋹",
+          "⋺",
+          "⋻",
+          "⋼",
+          "⋽",
+          "⋾",
+          "⋿",
+        ];
+
+        for (let i = 0; i < 50; i++) {
+          const symbol = document.createElement("div");
+          symbol.className = "math-symbol";
+          symbol.textContent =
+            mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+
+          // Random position
+          symbol.style.left = `${Math.random() * 100}%`;
+          symbol.style.top = `${Math.random() * 100}%`;
+
+          // Random animation duration
+          symbol.style.animationDuration = `${10 + Math.random() * 20}s`;
+
+          // Random delay
+          symbol.style.animationDelay = `${Math.random() * 5}s`;
+
+          mathBackground.appendChild(symbol);
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById("chapter-search");
+        searchInput.addEventListener("input", function () {
+          const searchTerm = this.value.toLowerCase();
+          const cards = document.querySelectorAll(".chapter-card");
+
+          cards.forEach((card) => {
+            const title = card
+              .querySelector(".chapter-title")
+              .textContent.toLowerCase();
+
+            if (title.includes(searchTerm)) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+
+        // Add hover effects to cards
+        const cards = document.querySelectorAll(".chapter-card");
+        cards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-8px)";
+            this.style.boxShadow = "0 12px 25px rgba(0,0,0,0.15)";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0)";
+            this.style.boxShadow = "0 6px 15px rgba(0,0,0,0.1)";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
